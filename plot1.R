@@ -24,5 +24,11 @@ tail(cons1)
 head(cons2)
 tail(cons2)
 consumption <- read.table(unz(temp, "household_power_consumption.txt"),header=TRUE,col.names=cols_consumption,sep=";", skip=66636, nrows=2880)
+consumption$Date <- parse_date(consumption$Date, "%d/%m/%Y")
+consumption$Time <- parse_time(consumption$Time, "%H:%M:%S")
 head(consumption)
 table(consumption$Date)
+
+
+hist(consumption$Global_active_power, col = "red", main = "Global Active Power", xlab = "Global Active Power (kilowats)")
+getwd()
